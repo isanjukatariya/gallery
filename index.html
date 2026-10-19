@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="en" oncontextmenu="return false;">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SANJU SINGH — ARCHIVE</title>
+  <!-- Fontshare Editorial Typography: Switzer (Neo-Grotesque) & Sentient (Editorial Serif) -->
+  <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
+  <link href="https://api.fontshare.com/v2/css?f[]=switzer@400,500&f[]=sentient@400,400i&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+      -webkit-user-select: none;
+      -webkit-touch-callout: none;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    html, body {
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      background-color: #FFFFFF;
+      color: #000000;
+      font-family: 'Switzer', sans-serif;
+      cursor: grab;
+    }
+
+    body:active {
+      cursor: grabbing;
+    }
+
+    /* Minimal Top Navigation Bar — Bulbs by Simon Dupety Inspired */
+    .top-bar {
+      position: fixed;
+      font-family: 'Sentient', serif;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 20px 28px;
+      display: grid;
+      grid-template-columns: 1fr auto auto;
+      column-gap: 72px;
+      align-items: start;
+      font-family: 'Switzer', sans-serif;
+      font-size: 12px;
+      line-height: 1.35;
+      letter-spacing: 0.04em;
+      font-weight: 500;
+      text-transform: uppercase;
+      z-index: 40;
+      pointer-events: none;
+    }
+
+    .top-bar-col {
+      pointer-events: auto;
+    }
+
+    .nav-link {
+      cursor: pointer;
+      display: inline-block;
+      color: #000000;
+      text-decoration: none;
+      transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .nav-link:hover {
+      opacity: 0.42;
+    }
+
+    .nav-link.is-active-filter {
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+
+    /* Raw unbordered S-Tier hover list directly beneath GOATED / S-TIER */
+    .goated-raw-list {
+      margin-top: 10px;
+      opacity: 0;
+      transform: translateY(-4px);
+      pointer-events: none;
+      transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .goated-trigger-wrap:hover .goated-raw-list {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .goated-item-link {
+      display: block;
+      padding: 2px 0;
+      cursor: pointer;
+      transition: opacity 0.25s ease;
+    }
+
+    .goated-item-link:hover {
+      opacity: 0.42;
+    }
+
+    /* Center-Left Minimal Series Title Display (Sentient Editorial Serif) */
+    .editorial-spec {
+      position: fixed;
+      top: 30vh;
+      left: 38vw;
+      z-index: 15;
+      font-family: 'Sentient', serif;
+      font-size: 15px;
+      line-height: 1.25;
+      letter-spacing: 0.02em;
+      color: #000000;
+      text-transform: uppercase;
+      pointer-events: none;
+    }
+
+    #specTitle {
+      display: inline-block;
+      transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* Pure Frames Stream Container */
+    .stream-stage {
+      position: fixed;
+      left: 0;
+      bottom: 0;
+      width: 100vw;
+      height: 64vh;
+      perspective: 1700px;
+      perspective-origin: 50% 50%;
+      z-index: 20;
+    }
+
+    .frame-item {
+      position: absolute;
+      top: 45%;
+      left: 0;
+      will-change: transform;
+      transform-style: preserve-3d;
+      backface-visibility: hidden;
+    }
+
+    /* Organic Curved / Warped Frame Wrapper */
+    .frame-mask {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background-color: #F6F6F4;
+      will-change: clip-path, transform;
+    }
+
+    .frame-img {
+      width: 118%;
+      height: 118%;
+      max-width: none;
+      object-fit: cover;
+      position: absolute;
+      top: -9%;
+      left: -9%;
+      will-change: transform;
+      pointer-events: none;
+      user-select: none;
+      -webkit-user-drag: none;
+      filter: contrast(1.02);
+    }
+
+    /* Pure Series Name Beneath Frame */
+    .frame-meta {
+      margin-top: 9px;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      font-family: 'Switzer', sans-serif;
+      font-size: 10px;
+      line-height: 1.2;
+      letter-spacing: 0.045em;
+      text-transform: uppercase;
+      font-weight: 500;
+      color: #000000;
+      opacity: 0.78;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+    }
+
+    .frame-item:hover .frame-meta {
+      opacity: 1;
+    }
+
+    @media (max-width: 768px) {
+      .top-bar {
+        grid-template-columns: 1fr auto;
+        column-gap: 24px;
+        row-gap: 10px;
+        padding: 16px 18px;
+      }
+      .editorial-spec {
+        left: 18px;
+        top: 25vh;
+        font-size: 13px;
+      }
+    }
+  </style>
+</head>
+<body oncontextmenu="return false;">
+
+  <!-- =====================================================================
+       SIMPLIFIED MINIMAL TOP BAR
+       ===================================================================== -->
+  <header class="top-bar">
+    <!-- Left: Portfolio Link Only (Replace href below with your actual portfolio URL) -->
+    <div class="top-bar-col">
+      <!-- PORTFOLIO LINK: Change the href URL below to your personal portfolio website -->
+      <a href="https://sanju-portfolio-three.vercel.app/" target="_blank" rel="noopener noreferrer" class="nav-link">
+        SANJU SINGH
+      </a>
+    </div>
+
+    <!-- Center-Right: GOATED / S-TIER (Hover for raw S-Tier list, Click to toggle S-Tier filter) -->
+    <div class="top-bar-col goated-trigger-wrap" id="goatedWrap">
+      <span id="navGoated" class="nav-link" onclick="toggleGoatedFilter()">GOATED / S-TIER</span>
+      <div id="goatedRawList" class="goated-raw-list"></div>
+    </div>
+
+    <!-- Far-Right: Minimal Year Stamp -->
+    <div class="top-bar-col text-right">
+      <div>2026</div>
+    </div>
+  </header>
+
+  <!-- =====================================================================
+       SPARSE EDITORIAL SERIES NAME (Pure Series Title Only, No Frame # or Author)
+       ===================================================================== -->
+  <section class="editorial-spec" aria-live="polite">
+    <span id="specTitle">ONE PIECE</span>
+  </section>
+
+  <!-- =====================================================================
+       PURE FRAMES CONTINUOUS RIGHT-TO-LEFT STREAM WITH SCREEN-EDGE WARP
+       ===================================================================== -->
+  <main id="streamStage" class="stream-stage" oncontextmenu="return false;"></main>
+
+  <script>
+    /* =====================================================================
+       1. WATCHED SERIES & ANIME ARCHIVE
+       To update images later, simply replace any `image` URL string below.
+       ===================================================================== */
+    const FRAMES_DATA = [
+      {
+        title: 'ONE PIECE',
+        goated: true,
+        width: 375,
+        height: 250,
+        yOffset: 0,
+        image: 'https://cdn.myanimelist.net/images/anime/1244/138851l.jpg'
+      },
+      {
+        title: 'NARUTO',
+        goated: false,
+        width: 295,
+        height: 340,
+        yOffset: -14,
+        image: 'https://cdn.myanimelist.net/images/anime/13/17405l.jpg'
+      },
+      {
+        title: 'DRAGON BALL Z',
+        goated: false,
+        width: 360,
+        height: 255,
+        yOffset: 16,
+        image: 'https://cdn.myanimelist.net/images/anime/1277/142022l.jpg'
+      },
+      {
+        title: 'ATTACK ON TITAN',
+        goated: false,
+        width: 285,
+        height: 345,
+        yOffset: 14,
+        image: 'https://cdn.myanimelist.net/images/anime/10/47347l.jpg'
+      },
+      {
+        title: 'DEATH NOTE',
+        goated: false,
+        width: 310,
+        height: 330,
+        yOffset: -18,
+        image: 'https://cdn.myanimelist.net/images/anime/9/9453l.jpg'
+      },
+      {
+        title: 'DEMON SLAYER',
+        goated: false,
+        width: 370,
+        height: 250,
+        yOffset: 12,
+        image: 'https://cdn.myanimelist.net/images/anime/1286/99889l.jpg'
+      },
+      {
+        title: 'JUJUTSU KAISEN',
+        goated: false,
+        width: 290,
+        height: 345,
+        yOffset: -10,
+        image: 'https://cdn.myanimelist.net/images/anime/1171/109222l.jpg'
+      },
+      {
+        title: 'BLEACH',
+        goated: false,
+        width: 355,
+        height: 260,
+        yOffset: 20,
+        image: 'https://cdn.myanimelist.net/images/anime/1908/135431l.jpg'
+      },
+      {
+        title: 'MY HERO ACADEMIA',
+        goated: false,
+        width: 300,
+        height: 335,
+        yOffset: -15,
+        image: 'https://cdn.myanimelist.net/images/anime/10/78745l.jpg'
+      },
+      {
+        title: 'FULLMETAL ALCHEMIST: BROTHERHOOD',
+        goated: false,
+        width: 380,
+        height: 250,
+        yOffset: 8,
+        image: 'https://cdn.myanimelist.net/images/anime/1208/94745l.jpg'
+      },
+      {
+        title: 'HUNTER X HUNTER',
+        goated: false,
+        width: 295,
+        height: 340,
+        yOffset: -20,
+        image: 'https://cdn.myanimelist.net/images/anime/1337/99013l.jpg'
+      },
+      {
+        title: 'POKÉMON',
+        goated: false,
+        width: 365,
+        height: 245,
+        yOffset: 14,
+        image: 'https://cdn.myanimelist.net/images/anime/13/73834l.jpg'
+      },
+      {
+        title: 'DETECTIVE CONAN',
+        goated: false,
+        width: 285,
+        height: 335,
+        yOffset: -12,
+        image: 'https://cdn.myanimelist.net/images/anime/7/75199l.jpg'
+      },
+      {
+        title: 'SLAM DUNK',
+        goated: false,
+        width: 375,
+        height: 255,
+        yOffset: 18,
+        image: 'https://cdn.myanimelist.net/images/anime/12/86890l.jpg'
+      },
+      {
+        title: 'ONE PUNCH MAN',
+        goated: false,
+        width: 315,
+        height: 320,
+        yOffset: -16,
+        image: 'https://cdn.myanimelist.net/images/anime/12/76049l.jpg'
+      },
+      {
+        title: 'TOKYO GHOUL',
+        goated: false,
+        width: 360,
+        height: 250,
+        yOffset: 10,
+        image: 'https://cdn.myanimelist.net/images/anime/5/64449l.jpg'
+      },
+      {
+        title: 'SWORD ART ONLINE',
+        goated: false,
+        width: 290,
+        height: 345,
+        yOffset: -14,
+        image: 'https://cdn.myanimelist.net/images/anime/11/39717l.jpg'
+      },
+      {
+        title: 'CHAINSAW MAN',
+        goated: false,
+        width: 385,
+        height: 245,
+        yOffset: 22,
+        image: 'https://cdn.myanimelist.net/images/anime/1806/126216l.jpg'
+      },
+      {
+        title: 'SPY X FAMILY',
+        goated: false,
+        width: 305,
+        height: 330,
+        yOffset: -8,
+        image: 'https://cdn.myanimelist.net/images/anime/1441/122795l.jpg'
+      },
+      {
+        title: 'HAIKYUU!!',
+        goated: true,
+        width: 370,
+        height: 250,
+        yOffset: 16,
+        image: 'https://cdn.myanimelist.net/images/anime/7/76014l.jpg'
+      },
+      {
+        title: 'BLACK CLOVER',
+        goated: false,
+        width: 295,
+        height: 340,
+        yOffset: -18,
+        image: 'https://cdn.myanimelist.net/images/anime/2/88336l.jpg'
+      },
+      {
+        title: 'FAIRY TAIL',
+        goated: false,
+        width: 360,
+        height: 255,
+        yOffset: 12,
+        image: 'https://cdn.myanimelist.net/images/anime/5/18179l.jpg'
+      },
+      {
+        title: 'JOJO’S BIZARRE ADVENTURE',
+        goated: false,
+        width: 300,
+        height: 345,
+        yOffset: -10,
+        image: 'https://cdn.myanimelist.net/images/anime/3/40409l.jpg'
+      },
+      {
+        title: 'VINLAND SAGA',
+        goated: true,
+        width: 365,
+        height: 245,
+        yOffset: 10,
+        image: 'https://cdn.myanimelist.net/images/anime/1170/124312l.jpg'
+      },
+      {
+        title: 'CODE GEASS',
+        goated: false,
+        width: 290,
+        height: 340,
+        yOffset: -16,
+        image: 'https://cdn.myanimelist.net/images/anime/1032/135088l.jpg'
+      },
+      {
+        title: 'STEINS;GATE',
+        goated: false,
+        width: 300,
+        height: 325,
+        yOffset: -20,
+        image: 'https://cdn.myanimelist.net/images/anime/1935/127974l.jpg'
+      },
+      {
+        title: 'COWBOY BEBOP',
+        goated: false,
+        width: 390,
+        height: 242,
+        yOffset: 22,
+        image: 'https://cdn.myanimelist.net/images/anime/4/19644l.jpg'
+      },
+      {
+        title: 'NEON GENESIS EVANGELION',
+        goated: false,
+        width: 295,
+        height: 345,
+        yOffset: -12,
+        image: 'https://cdn.myanimelist.net/images/anime/1314/108941l.jpg'
+      },
+      {
+        title: 'DRAGON BALL SUPER',
+        goated: false,
+        width: 370,
+        height: 250,
+        yOffset: 14,
+        image: 'https://cdn.myanimelist.net/images/anime/7/74606l.jpg'
+      },
+      {
+        title: 'BORUTO: NARUTO NEXT GENERATIONS',
+        goated: false,
+        width: 300,
+        height: 330,
+        yOffset: -18,
+        image: 'https://cdn.myanimelist.net/images/anime/9/84460l.jpg'
+      },
+      {
+        title: 'DR. STONE',
+        goated: false,
+        width: 365,
+        height: 255,
+        yOffset: 16,
+        image: 'https://cdn.myanimelist.net/images/anime/1613/102576l.jpg'
+      },
+      {
+        title: 'MOB PSYCHO 100',
+        goated: false,
+        width: 290,
+        height: 340,
+        yOffset: -10,
+        image: 'https://cdn.myanimelist.net/images/anime/1918/96303l.jpg'
+      },
+      {
+        title: 'BLUE LOCK',
+        goated: false,
+        width: 375,
+        height: 248,
+        yOffset: 20,
+        image: 'https://cdn.myanimelist.net/images/anime/1258/126929l.jpg'
+      },
+      {
+        title: 'SOLO LEVELING',
+        goated: false,
+        width: 295,
+        height: 345,
+        yOffset: -14,
+        image: 'https://cdn.myanimelist.net/images/anime/1801/142390l.jpg'
+      },
+      {
+        title: 'THE SEVEN DEADLY SINS',
+        goated: false,
+        width: 360,
+        height: 250,
+        yOffset: 12,
+        image: 'https://cdn.myanimelist.net/images/anime/8/65409l.jpg'
+      },
+      {
+        title: 'RE:ZERO − STARTING LIFE IN ANOTHER WORLD',
+        goated: false,
+        width: 305,
+        height: 335,
+        yOffset: -16,
+        image: 'https://cdn.myanimelist.net/images/anime/1522/128039l.jpg'
+      },
+      {
+        title: 'KUROKO’S BASKETBALL',
+        goated: false,
+        width: 370,
+        height: 250,
+        yOffset: 18,
+        image: 'https://cdn.myanimelist.net/images/anime/11/50453l.jpg'
+      },
+      {
+        title: 'FRUITS BASKET',
+        goated: false,
+        width: 290,
+        height: 340,
+        yOffset: -12,
+        image: 'https://cdn.myanimelist.net/images/anime/1447/99827l.jpg'
+      },
+      {
+        title: 'YOUR LIE IN APRIL',
+        goated: false,
+        width: 380,
+        height: 245,
+        yOffset: 14,
+        image: 'https://cdn.myanimelist.net/images/anime/3/67177l.jpg'
+      },
+      {
+        title: 'THE PROMISED NEVERLAND',
+        goated: false,
+        width: 295,
+        height: 335,
+        yOffset: -20,
+        image: 'https://cdn.myanimelist.net/images/anime/1830/118780l.jpg'
+      },
+      {
+        title: 'ASSASSINATION CLASSROOM',
+        goated: false,
+        width: 365,
+        height: 250,
+        yOffset: 10,
+        image: 'https://cdn.myanimelist.net/images/anime/5/75639l.jpg'
+      },
+      {
+        title: 'BUNGO STRAY DOGS',
+        goated: false,
+        width: 300,
+        height: 340,
+        yOffset: -14,
+        image: 'https://cdn.myanimelist.net/images/anime/3/79409l.jpg'
+      },
+      {
+        title: 'FIRE FORCE',
+        goated: false,
+        width: 370,
+        height: 255,
+        yOffset: 16,
+        image: 'https://cdn.myanimelist.net/images/anime/1664/103275l.jpg'
+      },
+      {
+        title: 'TOKYO REVENGERS',
+        goated: false,
+        width: 290,
+        height: 345,
+        yOffset: -10,
+        image: 'https://cdn.myanimelist.net/images/anime/1839/122012l.jpg'
+      },
+      {
+        title: 'PARASYTE: THE MAXIM',
+        goated: false,
+        width: 360,
+        height: 250,
+        yOffset: 18,
+        image: 'https://cdn.myanimelist.net/images/anime/3/73178l.jpg'
+      },
+      {
+        title: 'HELLSING ULTIMATE',
+        goated: false,
+        width: 305,
+        height: 335,
+        yOffset: -16,
+        image: 'https://cdn.myanimelist.net/images/anime/1012/143965l.jpg'
+      },
+      {
+        title: 'OVERLORD',
+        goated: false,
+        width: 375,
+        height: 248,
+        yOffset: 12,
+        image: 'https://cdn.myanimelist.net/images/anime/7/88019l.jpg'
+      },
+      {
+        title: 'THE RISING OF THE SHIELD HERO',
+        goated: false,
+        width: 295,
+        height: 340,
+        yOffset: -18,
+        image: 'https://cdn.myanimelist.net/images/anime/1490/101365l.jpg'
+      },
+      {
+        title: 'CLASSROOM OF THE ELITE',
+        goated: false,
+        width: 365,
+        height: 250,
+        yOffset: 14,
+        image: 'https://cdn.myanimelist.net/images/anime/5/86830l.jpg'
+      },
+      {
+        title: 'MADE IN ABYSS',
+        goated: false,
+        width: 300,
+        height: 345,
+        yOffset: -12,
+        image: 'https://cdn.myanimelist.net/images/anime/6/86733l.jpg'
+      },
+      {
+        title: 'MONSTER',
+        goated: false,
+        width: 355,
+        height: 248,
+        yOffset: 18,
+        image: 'https://cdn.myanimelist.net/images/anime/10/18793l.jpg'
+      },
+      {
+        title: 'BERSERK',
+        goated: false,
+        width: 295,
+        height: 350,
+        yOffset: -18,
+        image: 'https://cdn.myanimelist.net/images/anime/1384/119699l.jpg'
+      },
+      {
+        title: 'CYBERPUNK: EDGERUNNERS',
+        goated: false,
+        width: 375,
+        height: 245,
+        yOffset: 20,
+        image: 'https://cdn.myanimelist.net/images/anime/1818/126435l.jpg'
+      },
+      {
+        title: 'BREAKING BAD',
+        goated: false,
+        width: 312,
+        height: 312,
+        yOffset: -12,
+        image: 'https://static.tvmaze.com/uploads/images/original_untouched/0/2400.jpg'
+      },
+      {
+        title: 'SEVERANCE',
+        goated: false,
+        width: 380,
+        height: 250,
+        yOffset: -8,
+        image: 'https://static.tvmaze.com/uploads/images/original_untouched/392/981266.jpg'
+      },
+      {
+        title: 'false DETECTIVE',
+        goated: false,
+        width: 295,
+        height: 335,
+        yOffset: -6,
+        image: 'https://static.tvmaze.com/uploads/images/original_untouched/490/1226769.jpg'
+      }
+    ];
+
+    /* =====================================================================
+       2. STREAM STATE & DOUBLE EXPONENTIAL SMOOTHING PHYSICS
+       ===================================================================== */
+    const stage = document.getElementById('streamStage');
+    const specTitleEl = document.getElementById('specTitle');
+    const FRAME_GAP = 96;
+
+    let filterGoatedOnly = false;
+    let activeList = [];
+    let domItems = [];
+    let totalTrackWidth = 0;
+
+    // Ultra-fluid delta-time speed & position state
+    const BASE_CRUISE_SPEED = 2.5;
+    const HOVER_CRAWL_SPEED = BASE_CRUISE_SPEED * 0.08;
+
+    let targetSpeed = BASE_CRUISE_SPEED;
+    let currentSpeed = BASE_CRUISE_SPEED;
+
+    let targetX = 0;
+    let currentX = 0;
+    let smoothedVelocity = 0;
+
+    let isHovered = false;
+    let hoveredSeriesTitle = null;
+    let displayedSeriesTitle = '';
+
+    // Horizontal drag state (no click-to-download or upload)
+    let isDragging = false;
+    let startPointerX = 0;
+    let startTargetX = 0;
+
+    let lastFrameTime = performance.now();
+
+    function buildStream() {
+      stage.innerHTML = '';
+      domItems = [];
+
+      const baseItems = filterGoatedOnly
+        ? FRAMES_DATA.filter(item => item.goated)
+        : FRAMES_DATA;
+
+      // Duplicate track items if needed so wide viewports wrap seamlessly
+      activeList = [...baseItems];
+      while (activeList.length < 10) {
+        activeList = [...activeList, ...baseItems];
+      }
+
+      let xCursor = 0;
+      activeList.forEach((data) => {
+        const el = document.createElement('div');
+        el.className = 'frame-item';
+        el.style.width = `${data.width}px`;
+        el.style.height = `${data.height}px`;
+
+        el.innerHTML = `
+          <div class="frame-mask">
+            <img
+              class="frame-img"
+              src="${data.image}"
+              alt="${data.title}"
+              draggable="false"
+              oncontextmenu="return false;"
+            />
+          </div>
+          <div class="frame-meta">
+            <span>${data.title}</span>
+          </div>
+        `;
+
+        const maskEl = el.querySelector('.frame-mask');
+        const imgEl = el.querySelector('.frame-img');
+
+        // Hover gently decelerates the stream and sets the series name
+        el.addEventListener('mouseenter', () => {
+          isHovered = true;
+          hoveredSeriesTitle = data.title;
+          setDisplayedTitle(data.title);
+        });
+
+        el.addEventListener('mouseleave', () => {
+          isHovered = false;
+          hoveredSeriesTitle = null;
+        });
+
+        stage.appendChild(el);
+
+        domItems.push({
+          el,
+          maskEl,
+          imgEl,
+          data,
+          baseX: xCursor,
+          width: data.width,
+          height: data.height,
+          yOffset: data.yOffset || 0
+        });
+
+        xCursor += data.width + FRAME_GAP;
+      });
+
+      totalTrackWidth = xCursor;
+      renderGoatedHeaderList();
+    }
+
+    function setDisplayedTitle(title) {
+      if (!title || title === displayedSeriesTitle) return;
+      displayedSeriesTitle = title;
+      specTitleEl.textContent = title;
+    }
+
+    function renderGoatedHeaderList() {
+      const listEl = document.getElementById('goatedRawList');
+      const goatedItems = FRAMES_DATA.filter(d => d.goated);
+      listEl.innerHTML = goatedItems
+        .map(d => `<div class="goated-item-link" onclick="jumpToSeries('${d.title.replace(/'/g, "\\'")}')">${d.title}</div>`)
+        .join('');
+    }
+
+    function toggleGoatedFilter() {
+      filterGoatedOnly = !filterGoatedOnly;
+      const navGoated = document.getElementById('navGoated');
+      if (filterGoatedOnly) {
+        navGoated.classList.add('is-active-filter');
+      } else {
+        navGoated.classList.remove('is-active-filter');
+      }
+      buildStream();
+    }
+
+    function jumpToSeries(title) {
+      const found = domItems.find(item => item.data.title === title);
+      if (!found) return;
+      const screenCenter = window.innerWidth * 0.5;
+      targetX = found.baseX - screenCenter + found.width * 0.5;
+      setDisplayedTitle(found.data.title);
+    }
+
+    /* =====================================================================
+       3. DELTA-TIME DOUBLE EXPONENTIAL SMOOTHING ANIMATION LOOP
+       ===================================================================== */
+    function animate(now) {
+      const rawDt = now - lastFrameTime;
+      lastFrameTime = now;
+      // Normalized delta time (1.0 at 60fps, clamped to prevent tab-switch jumps)
+      const dt = Math.min(2.5, Math.max(0.1, rawDt / 16.6667));
+
+      // 1st Exponential Smoothing: Interpolate currentSpeed toward targetSpeed
+      targetSpeed = isHovered ? HOVER_CRAWL_SPEED : BASE_CRUISE_SPEED;
+      const speedAlpha = 1 - Math.pow(1 - 0.035, dt);
+      currentSpeed += (targetSpeed - currentSpeed) * speedAlpha;
+
+      if (!isDragging) {
+        targetX += currentSpeed * dt;
+      }
+
+      // 2nd Exponential Smoothing: Interpolate currentX toward targetX
+      const posAlpha = 1 - Math.pow(1 - 0.065, dt);
+      const prevX = currentX;
+      currentX += (targetX - currentX) * posAlpha;
+
+      const instantVelocity = (currentX - prevX) / dt;
+      smoothedVelocity += (instantVelocity - smoothedVelocity) * 0.14;
+
+      const vw = window.innerWidth;
+      const screenCenter = vw * 0.5;
+      let closestToCenter = null;
+      let minCenterDist = Infinity;
+
+      if (totalTrackWidth > 0) {
+        for (let i = 0; i < domItems.length; i++) {
+          const item = domItems[i];
+
+          // Seamless right-to-left modular wrap
+          let rawX = item.baseX - currentX;
+          let wrappedX = ((rawX % totalTrackWidth) + totalTrackWidth) % totalTrackWidth;
+
+          // Allow full exit off the left edge before wrapping back to the right edge
+          if (wrappedX > totalTrackWidth - item.width - FRAME_GAP) {
+            wrappedX -= totalTrackWidth;
+          }
+
+          const frameCenter = wrappedX + item.width * 0.5;
+          const distFromCenter = frameCenter - screenCenter;
+          const absDist = Math.abs(distFromCenter);
+
+          if (absDist < minCenterDist) {
+            minCenterDist = absDist;
+            closestToCenter = item.data;
+          }
+
+          // Normalized position across viewport (-1 left edge, 0 center, +1 right edge)
+          const normX = distFromCenter / (vw * 0.56);
+          const absNorm = Math.min(1.35, Math.abs(normX));
+
+          // Screen-Edge Wrap Effect: subtle 3D cylindrical bend + fluid velocity shear
+          const edgeCurve = Math.pow(Math.max(0, absNorm - 0.24), 1.85);
+          const rotateY = -normX * 32 * edgeCurve;
+          const translateZ = -edgeCurve * 145;
+          const skewY = (normX * 2.4 * edgeCurve) + Math.max(-3.5, Math.min(3.5, smoothedVelocity * 0.1));
+          const scale = 1 - edgeCurve * 0.085;
+
+          // Organic polygon perspective warp near screen boundaries (Bulbs by Simon Dupety style)
+          const pinch = Math.min(8.5, edgeCurve * 6.2 + Math.abs(smoothedVelocity) * 0.15);
+          const leftPinch = normX < 0 ? pinch : pinch * 0.32;
+          const rightPinch = normX > 0 ? pinch : pinch * 0.32;
+          item.maskEl.style.clipPath = `polygon(${leftPinch.toFixed(2)}% 0%, ${(100 - rightPinch).toFixed(2)}% 0%, 100% 100%, 0% 100%)`;
+
+          // Inner image counter-parallax
+          const parallaxX = Math.max(-8, Math.min(8, -normX * 6.2));
+          item.imgEl.style.transform = `translate3d(${parallaxX.toFixed(2)}%, 0, 0) scale(1.04)`;
+
+          // GPU-accelerated 3D frame transform
+          item.el.style.transform = `translate3d(${wrappedX.toFixed(2)}px, calc(-50% + ${item.yOffset}px), ${translateZ.toFixed(2)}px) rotateY(${rotateY.toFixed(2)}deg) skewY(${skewY.toFixed(2)}deg) scale(${scale.toFixed(3)})`;
+        }
+      }
+
+      // Show hovered series name, or the centered series name when gliding freely
+      if (hoveredSeriesTitle) {
+        setDisplayedTitle(hoveredSeriesTitle);
+      } else if (closestToCenter) {
+        setDisplayedTitle(closestToCenter.title);
+      }
+
+      requestAnimationFrame(animate);
+    }
+
+    /* =====================================================================
+       4. FLUID WHEEL, TRACKPAD & DRAG NAVIGATION (NO IMAGE SAVING/DOWNLOAD)
+       ===================================================================== */
+    window.addEventListener('wheel', (e) => {
+      e.preventDefault();
+      const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
+      targetX += delta * 0.8;
+    }, { passive: false });
+
+    window.addEventListener('pointerdown', (e) => {
+      if (e.target.closest('.top-bar-col')) return;
+      isDragging = true;
+      startPointerX = e.clientX;
+      startTargetX = targetX;
+    });
+
+    window.addEventListener('pointermove', (e) => {
+      if (!isDragging) return;
+      const dx = startPointerX - e.clientX;
+      targetX = startTargetX + dx * 1.25;
+    });
+
+    const stopDragging = () => {
+      isDragging = false;
+    };
+    window.addEventListener('pointerup', stopDragging);
+    window.addEventListener('pointercancel', stopDragging);
+
+    // Prevent default image dragstart globally
+    window.addEventListener('dragstart', (e) => e.preventDefault());
+
+    window.onload = () => {
+      buildStream();
+      lastFrameTime = performance.now();
+      requestAnimationFrame(animate);
+    };
+  </script>
+</body>
+</html>
